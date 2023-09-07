@@ -22,6 +22,8 @@ class CXpm{
     std::map<std::string,RGB> m_meta;
     std::vector<std::vector<RGB>> m_pixmap;
 
+    std::map<std::string,RGB> m_color_cache;
+
     public:
     bool parser(const char* file);
     int width();

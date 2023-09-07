@@ -10,6 +10,5 @@ int main(int argc,char** argv) {
         std::cout << "parser error." << std::endl;
     }
     
-
     return 0;
 }

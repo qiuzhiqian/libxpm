@@ -3,6 +3,30 @@
 
 #include <fstream>
 #include <iostream>
+#include <map>
+#include <algorithm>
+
+const std::map<std::string, RGB> color_name_map= {
+    {"aqua", {0x00,0xff,0xff}},
+    {"black", {0x00,0x00,0x00}},
+    {"blue", {0x00,0x00,0xff}},
+    {"fuchsia", {0xff,0x00,0xff}},
+
+    {"gray", {0x80,0x80,0x80}},
+    {"green", {0x00,0x80,0x00}},
+    {"lime", {0x00,0xff,0x00}},
+    {"maroon", {0x80,0x00,0x00}},
+
+    {"navy", {0x00,0x00,0x80}},
+    {"olive", {0x80,0x80,0x00}},
+    {"purple", {0x80,0x00,0x80}},
+    {"red", {0xff,0x00,0x00}},
+
+    {"silver", {0xc0,0xc0,0xc0}},
+    {"teal", {0x00,0x80,0x80}},
+    {"white", {0xff,0xff,0xff}},
+    {"yellow", {0xff,0xff,0x00}},
+};
 
 static bool start_line(const char* str) {
     std::smatch m;
@@ -46,6 +70,25 @@ static std::string get_raw_content(const char* str) {
     return std::string();
 }
 
+void rgb24to48(RGB& rgb) {
+    rgb.r = (double)rgb.r * 0xffff / 0xff;
+    rgb.g = (double)rgb.g * 0xffff / 0xff;
+    rgb.b = (double)rgb.b * 0xffff / 0xff;
+}
+
+//aqua、black、blue、fuchsia、gray、green、lime、maroon、navy、olive、purple、red、silver、teal、white、yellow。
+RGB get_color_by_name(const std::string color) {
+    RGB rgb;
+    if(color.compare(0, 4, "gray") == 0 && color.size() > 4) {
+        rgb.r = static_cast<uint32_t>(std::stoi(color.substr(4)));
+        rgb.g = rgb.r;
+        rgb.b = rgb.r;
+    } else {
+        rgb = color_name_map.at(color);
+    }
+    return rgb;
+}
+
 bool CXpm::parser(const char *file) {
     std::ifstream infile;
 	infile.open(file, std::ios::in);
@@ -78,14 +121,15 @@ bool CXpm::parser(const char *file) {
 
         if(origin_started) {
             auto content = get_raw_content(buf.c_str());
+            std::replace(content.begin(),content.end(),'\t',' ');
             if(!content.empty() && content.size() >= 5) {
-                //std::cout << content << std::endl;
+                // find c token
                 if(line_num == 0) {
                     //first line
                     trim(content);
                     auto tokens = split(content," ");
                     //std::cout << tokens.size() << std::endl;
-                    if(tokens.size() == 4) {
+                    if(tokens.size() >= 4) {
                         this->m_width = std::stoi(tokens[0]);
                         this->m_height = std::stoi(tokens[1]);
                         this->m_color_count = std::stoi(tokens[2]);
@@ -105,39 +149,68 @@ bool CXpm::parser(const char *file) {
                     std::string key = content.substr(0, this->m_chars);
                     std::string color_token = content.substr(this->m_chars);
                     trim(color_token);
+                    //std::cout << "color_token=" << color_token << std::endl;
                     auto c = split(color_token, std::string(" "));
-                    //std::cout << "key= " << key << " " << c.size() << " " << c[1] << std::endl;
-                    if(c.size() == 2 || c.size() == 4) {
+                    //std::cout << "key= " << key << " " << c.size() << " " << c[0][0] << " " << c[0].size() << std::endl;
+
+                    int color_pos = -1;
+                    for(int i=0; i<c.size(); i++) {
+                        trim(c[i]);
+                        //std::cout << "c i=" << i <<"="<<c[i] << std::endl;
+                        if(c[i] == "c") {
+                            //std::cout << "find c token index " << i <<" " << c.size() << std::endl;
+                            color_pos = i+1;
+                            break;
+                        }
+                    }
+
+                    if(color_pos < c.size() && color_pos >= 0) {
                         uint32_t r;
                         uint32_t g;
                         uint32_t b;
-                        std::string symble = c.at(c.size() -1);
-                        //std::cout << "sysmble: " << symble << std::endl;
+                        std::string symble = c.at(color_pos);
+                        std::string lower_symble = symble;
+                        std::transform(symble.begin(),symble.end(),lower_symble.begin(),::tolower);
 
                         if(symble.at(0) == '#') {
-                            this->m_pix_bits = (symble.size() - 1) *4; 
+                            if(this->m_pix_bits == 0) {
+                                this->m_pix_bits = (symble.size() - 1) *4; 
+                            }
+                            
                             int len = this->m_pix_bits/12;
                             r = static_cast<uint32_t>(std::stoi(symble.substr(1,len),0,16));
                             g = static_cast<uint32_t>(std::stoi(symble.substr(1 + len, len),0,16));
                             b = static_cast<uint32_t>(std::stoi(symble.substr(1 + len * 2, len),0,16));
-                        } else if(symble == "None") {
-                            r = 0;
-                            g = 0;
-                            b = 0;
-                        } else if(symble.compare(0, 4, "gray") == 0){
-                            r = static_cast<uint32_t>(std::stoi(symble.substr(4)));
-                            g = r;
-                            b = r;
-                            //std::cout << "has gray pix: " << r << std::endl;
+                            this->m_meta[key] = RGB{r, g, b};
+                        } else if(lower_symble == "none") {
+                            this->m_color_cache[key] = RGB{0xff,0xff,0xff};
                         } else {
-                            infile.close();
-                            return false;
+                            RGB rgb;
+                            try {
+                                rgb = get_color_by_name(symble);
+                            }
+                            catch (const std::out_of_range& oor) {
+                                infile.close();
+                                return false;
+                            }
+                            this->m_color_cache[key] = rgb;
+                            //std::cout << "has gray pix: " << r << std::endl;
                         }
                         //std::cout << r << " " << g << " " << b << " " << std::endl;
-                        this->m_meta[key] = RGB{r, g, b};
+                        
                     } else {
                         infile.close();
                         return false;
+                    }
+
+                    // 已经到了color规则的最后一行，需要在此处把前面cache的颜色进行重新处理。
+                    if(line_num == this->m_color_count) {
+                        for (auto it=this->m_color_cache.begin(); it!=this->m_color_cache.end(); ++it){
+                            if(this->m_pix_bits == 48) {
+                                rgb24to48(it->second);
+                            }
+                            this->m_meta[it->first]=it->second;
+                        }
                     }
                 } else {
                     if(content.size() == this->m_width * this->m_chars) {
