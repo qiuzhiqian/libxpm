@@ -14,6 +14,9 @@ $ make
 $ ./tools/xpm2rgb /usr/share/pixmaps/vim-16.xpm
 size: 16x16
 pixel_format: rgb24
+
+rgb raw图片查看：
+$ ffplay -f rawvideo -pixel_format rgb24 -video_size 16x16 xpm-save.rgb
 ```
 
 测试用例：
