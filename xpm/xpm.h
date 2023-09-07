@@ -13,11 +13,11 @@ struct RGB{
 
 class CXpm{
     private:
-    int m_height;
-    int m_width;
-    int m_color_count;
-    int m_chars;
-    int m_pix_bits;
+    int m_height=0;
+    int m_width=0;
+    int m_color_count=0;
+    int m_chars=0;
+    int m_pix_bits=0;
 
     std::map<std::string,RGB> m_meta;
     std::vector<std::vector<RGB>> m_pixmap;

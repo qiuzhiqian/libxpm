@@ -205,6 +205,9 @@ bool CXpm::parser(const char *file) {
 
                     // 已经到了color规则的最后一行，需要在此处把前面cache的颜色进行重新处理。
                     if(line_num == this->m_color_count) {
+                        if(this->m_pix_bits == 0) {
+                            this->m_pix_bits = 24;
+                        }
                         for (auto it=this->m_color_cache.begin(); it!=this->m_color_cache.end(); ++it){
                             if(this->m_pix_bits == 48) {
                                 rgb24to48(it->second);
