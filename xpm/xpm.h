@@ -31,4 +31,5 @@ class CXpm{
     void show_info();
 
     bool save(const char* file);
+    void to_bitmap(char* data);
 };

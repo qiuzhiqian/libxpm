@@ -286,3 +286,19 @@ bool CXpm::save(const char *file) {
     outfile.close();
     return true;
 }
+
+void CXpm::to_bitmap(char *data) {
+    int start_index = 0;
+    for(auto y = 0;y < this->height();y++) {
+        for(auto x = 0;x < this->width();x++) {
+            auto rgb= this->m_pixmap.at(y).at(x);
+            int len = this->m_pix_bits/24;
+            memcpy(data + start_index, (char *)&(rgb.r), len);
+            start_index+=len;
+            memcpy(data + start_index, (char *)&(rgb.g), len);
+            start_index+=len;
+            memcpy(data + start_index, (char *)&(rgb.b), len);
+            start_index+=len;
+        }
+    }
+}
