@@ -259,6 +259,10 @@ int CXpm::height() {
     return this->m_pixmap.size();
 }
 
+int CXpm::pix_bits() {
+    return this->m_pix_bits;
+}
+
 void CXpm::show_info() {
     std::cout << "size: " << this->m_width << "x" << this->m_height << std::endl;
     std::cout << "pixel_format: " << "rgb" << this->m_pix_bits << std::endl;

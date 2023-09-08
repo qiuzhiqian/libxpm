@@ -1,11 +1,16 @@
 #include <iostream>
-#include "xpm.h"
+#include "../xpm/xpm.h"
 
 int main(int argc,char** argv) {
+    if(argc != 3) {
+        std::cout << "Usage: " << argv[0] << " xpm_file_path rgb_file_path" << std::endl;
+        return 0;
+    }
+
     CXpm *xpm = new CXpm();
     if(xpm->parser(argv[1])) {
         xpm->show_info();
-        xpm->save("./xpm-save.rgb");
+        xpm->save(argv[2]);
     } else {
         std::cout << "parser error." << std::endl;
     }

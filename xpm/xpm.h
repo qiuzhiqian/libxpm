@@ -28,6 +28,7 @@ class CXpm{
     bool parser(const char* file);
     int width();
     int height();
+    int pix_bits();
     void show_info();
 
     bool save(const char* file);
