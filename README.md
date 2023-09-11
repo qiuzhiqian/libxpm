@@ -1,5 +1,5 @@
 # libxpm
-这是一个将xpm图片文件转换成pixmap数组的cpp库。
+这是一个将xpm图片文件转换成pixmap数组的cpp库。适用于linux平台和android平台。
 
 当然，你也可以直接使用tools目录中附带的xpm2rgb和xpm2png根据对xpm图片进行格式转换
 
@@ -41,6 +41,11 @@ Test project /home/work/xpm2rgb/build/xpm
 100% tests passed, 0 tests failed out of 1
 
 Total Test time (real) =   1.41 sec
+```
+
+# Android 环境编译
+```
+# mmm external/libxpm/
 ```
 
 # 依赖
