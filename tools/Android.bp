@@ -1,0 +1,11 @@
+cc_binary {
+   name: "xpm2rgb",
+   shared_libs: [“libxpm”],
+   srcs: ["xpm2rgb.cpp"],
+}
+
+cc_binary {
+   name: "xpm2png",
+   shared_libs: [“libxpm”],
+   srcs: ["xpm2png.cpp"],
+}

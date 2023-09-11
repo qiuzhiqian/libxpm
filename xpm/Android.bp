@@ -1,0 +1,15 @@
+cc_library_shared {
+   name: "libxpm",
+   srcs: [
+      "xpm.cpp",
+      "utils.cpp",
+   ],
+}
+
+cc_binary {
+   name: "xpm-test",
+   srcs: ["test.cpp"],
+   shared_libs: [
+      "libxpm",
+   ],
+}
