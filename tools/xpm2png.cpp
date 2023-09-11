@@ -7,7 +7,6 @@ int write_png(const char *file_name, int width,int height, int bit_depth, unsign
     FILE *fp;
     png_structp png_ptr;
     png_infop info_ptr;
-    png_colorp palette;
 
     /* 打开需要写入的文件 */
     fp = fopen(file_name, "wb");

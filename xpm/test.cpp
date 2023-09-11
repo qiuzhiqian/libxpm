@@ -2,9 +2,7 @@
 #include <vector>
 #include "xpm.h"
 
-int main(int argc,char** argv) {
-    CXpm *xpm = new CXpm();
-
+int main(int/* argc*/,char**/* argv*/) {
     std::vector<std::string> list{
         "/usr/share/themes/deepin/xfwm4/title-5-inactive.xpm",
 "/usr/share/themes/deepin/xfwm4/close-active.xpm",
