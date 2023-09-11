@@ -1,10 +1,10 @@
-**English** | [简体中文](./README_zh.md)
+[English](./README.md) | **简体中文**
 # libxpm
-This is a cpp library to convert xpm image files to pixmap arrays. libxpm is available for linux platform and android platform.
+这是一个将xpm图片文件转换成pixmap数组的cpp库。适用于linux平台和android平台。
 
-Of course, you can also directly use the xpm2rgb and xpm2png tools included in the tools directory to convert xpm images to the corresponding formats
+当然，你也可以直接使用tools目录中附带的xpm2rgb和xpm2png工具将xpm图片转换到对应的格式。
 
-# compiling
+# 编译
 ## Linux
 ```
 $ mkdir build
@@ -18,8 +18,8 @@ $ make
 # mmm external/libxpm/
 ```
 
-# Running and testing
-tools/xpm2rgb test
+# 运行和测试
+tools/xpm2rgb工具测试
 ```
 $ ./tools/xpm2rgb /usr/share/pixmaps/vim-16.xpm xpm-save.rgb
 size: 16x16
@@ -29,15 +29,15 @@ rgb raw图片查看：
 $ ffplay -f rawvideo -pixel_format rgb24 -video_size 16x16 xpm-save.rgb
 ```
 
-tools/xpm2png test
+tools/xpm2png工具测试
 ```
 $ ./tools/xpm2png /usr/share/pixmaps/python.xpm xpm-save.png
 size: 32x32
 pixel_format: rgb24
 ```
-**Note: The png format files can be opened directly using the image viewer tool.**
+备注：**png格式文件直接使用图片查看工具打开即可。**
 
-test case:
+测试用例：
 ```
 $ ctest --test-dir xpm/ -C DEBUG
 Internal ctest changing into directory: /home/work/xpm2rgb/build/xpm
@@ -50,8 +50,8 @@ Test project /home/work/xpm2rgb/build/xpm
 Total Test time (real) =   1.41 sec
 ```
 
-# dependencies
-libxpm itself is based on c++11, which itself just uses the std library, and doesn't additionally introduce other three-way libraries:
+# 依赖
+libxpm本身基于c++11，本身只是用了std库，并没有额外引入其他三方库：
 ```
 $ ldd build/xpm/libxpm.so 
         linux-vdso.so.1 (0x00007ffec0d54000)
@@ -61,7 +61,7 @@ $ ldd build/xpm/libxpm.so
         libc.so.6 => /lib/x86_64-linux-gnu/libc.so.6 (0x00007f07bd98f000)
         /lib64/ld-linux-x86-64.so.2 (0x00007f07bdf50000)
 ```
-If you need to use the conversion logic in the xpm2png part of this code, you need to introduce the library libpng additionally:
+如果需要使用本代码中的xpm2png部分的转换逻辑，则需要额外引入libpng这个库：
 ```
 $ ldd build/tools/xpm2png 
         linux-vdso.so.1 (0x00007fff1eba5000)
@@ -74,4 +74,5 @@ $ ldd build/tools/xpm2png
         libz.so.1 => /lib/x86_64-linux-gnu/libz.so.1 (0x00007f27dd58d000)
         /lib64/ld-linux-x86-64.so.2 (0x00007f27ddba7000)
 ```
-For the libpng library, both the linux platform and the android aosp (external/libpng) include this library, so the project can run normally on both linux and android platforms.
+
+对于libpng库，linux平台和android aosp(external/libpng)均自带这个库，因此该工程可以正常运行在linux和android平台上
