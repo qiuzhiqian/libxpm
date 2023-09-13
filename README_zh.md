@@ -48,15 +48,15 @@ pixel_format: rgb24
 
 测试用例：
 ```
-$ ctest --test-dir xpm/ -C DEBUG
-Internal ctest changing into directory: /home/work/xpm2rgb/build/xpm
-Test project /home/work/xpm2rgb/build/xpm
+$ make test
+Running tests...
+Test project /home/work/libxpm/build
     Start 1: mytest
-1/1 Test #1: mytest ...........................   Passed    1.41 sec
+1/1 Test #1: mytest ...........................   Passed    0.15 sec
 
 100% tests passed, 0 tests failed out of 1
 
-Total Test time (real) =   1.41 sec
+Total Test time (real) =   0.15 sec
 ```
 
 # 依赖

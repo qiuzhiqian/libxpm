@@ -2,24 +2,28 @@
 #include <vector>
 #include "xpm.h"
 
-int main(int/* argc*/,char**/* argv*/) {
+int main(int argc,char** argv) {
+    if(argc != 2) {
+        std::cout << argv[0] << " test_xpm_dir" << std::endl;
+    }
     std::vector<std::string> list{
-        "../res/logo_1.xpm",
-        "../res/logo_2.xpm",
-        "../res/logo_3.xpm",
-        "../res/logo_4.xpm",
-        "../res/logo_5.xpm",
-        "../res/logo_6.xpm",
-        "../res/logo_7.xpm",
-        "../res/logo_8.xpm",
-        "../res/logo_9.xpm",
-        "../res/logo_10.xpm",
+        "logo_1.xpm",
+        "logo_2.xpm",
+        "logo_3.xpm",
+        "logo_4.xpm",
+        "logo_5.xpm",
+        "logo_6.xpm",
+        "logo_7.xpm",
+        "logo_8.xpm",
+        "logo_9.xpm",
+        "logo_10.xpm",
     };
 
     for(auto i:list) {
         std::cout << "parser: " << i<< std::endl;
         CXpm xpm;
-        if(xpm.parser(i.c_str())) {
+        std::string path = std::string(argv[1]) + "/" + i;
+        if(xpm.parser(path.c_str())) {
             xpm.show_info();
         } else {
             std::cerr << "xpm parser failed." << std::endl;
