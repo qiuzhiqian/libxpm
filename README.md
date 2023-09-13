@@ -1,4 +1,13 @@
 **English** | [简体中文](./README_zh.md)
+
+```
+  _  _  _                            
+ | |(_)| |__ __  __ _ __   _ __ ___  
+ | || || '_ \\ \/ /| '_ \ | '_ ` _ \ 
+ | || || |_) |>  < | |_) || | | | | |
+ |_||_||_.__//_/\_\| .__/ |_| |_| |_|
+                   |_|               
+```
 # libxpm
 This is a cpp library to convert xpm image files to pixmap arrays. libxpm is available for linux platform and android platform.
 
