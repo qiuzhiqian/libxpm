@@ -112,7 +112,7 @@ bool CXpm::parser(const char *file) {
         } else if(end_line(buf.c_str())) {
             origin_started = false;
             //std::cout << "this is end line" << std::endl;
-            continue;
+            break;
         } else if(end_line_with_sysmble(buf.c_str(), endline)) {
             buf = endline;
             close_after = true;
@@ -239,10 +239,15 @@ bool CXpm::parser(const char *file) {
         if(close_after) {
             origin_started = false;
             close_after = false;
+            break;
         }
 	}
     infile.close();
     if(this->m_height != this->m_pixmap.size()) {
+        return false;
+    }
+
+    if(this->m_pixmap.empty() || this->m_pixmap.at(0).empty()) {
         return false;
     }
     return true;
