@@ -5,6 +5,7 @@
 int main(int argc,char** argv) {
     if(argc != 2) {
         std::cout << argv[0] << " test_xpm_dir" << std::endl;
+        return -1;
     }
     std::vector<std::string> list{
         "logo_1.xpm",
