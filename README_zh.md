@@ -35,7 +35,7 @@ $ ./tools/xpm2png /usr/share/pixmaps/python.xpm xpm-save.png
 size: 32x32
 pixel_format: rgb24
 ```
-备注：**png格式文件直接使用图片查看工具打开即可。**
+**备注：png格式文件直接使用图片查看工具打开即可。**
 
 测试用例：
 ```

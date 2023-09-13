@@ -38,14 +38,14 @@ static bool start_line(const char* str) {
 static bool end_line(const char* str) {
     std::smatch m;
     std::string s(str);
-    std::regex reg("^\\s*};");
+    std::regex reg("^\\s*\\};");
     return std::regex_search(s, m, reg);
 }
 
 static bool end_line_with_sysmble(const char* str, std::string& content) {
     std::smatch m;
     std::string s(str);
-    std::regex reg("^\\s*(\".*\")\\s*};");
+    std::regex reg("^\\s*(\".*\")\\s*\\};");
     //bool res = std::regex_search(s, m, reg);
     while (std::regex_search (s, m, reg)) {
         if(m.length()>=2) {
