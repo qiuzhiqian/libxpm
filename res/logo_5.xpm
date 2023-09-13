@@ -1,0 +1,17 @@
+/* XPM */
+static char * logo_xpm[] = {
+/* width height ncolors cpp [x_hot y_hot] */
+"41 8 3 2 0 0",
+/* colors */
+"  	s none	m none	c none",
+"AA	s iconColor1	m black	c black",
+"BB	s iconColor2	m white	c red",
+/* pixels */
+"AAAA        BBBB    AAAA            AAAA        AAAA    AAAAAA      AA          AA",
+"AAAA      BBBBBBBB  AAAA              AAAA      AA      AA  AAAA    AAAA      AAAA",
+"AAAA        BBBB    AAAA                AAAA  AA        AA    AAAA  AAAA      AAAA",
+"AAAA                AAAAAAAAAA            AAAA          AA  AAAA    AA  AA  AA  AA",
+"AAAA        AAAA    AAAAAA  AAAA          AA  AA        AAAAAA      AA  AA  AA  AA",
+"AAAA        AAAA    AAAA    AAAA        AA    AAAA      AA          AA    AA    AA",
+"AAAA  AA    AAAA    AAAAAA  AAAA      AA        AAAA    AA          AA    AA    AA",
+"AAAAAAAA    AAAA    AAAAAAAAAA      AAAAAA        AAAA  AA          AA          AA"   ,   };
