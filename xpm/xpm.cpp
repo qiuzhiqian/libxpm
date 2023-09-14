@@ -250,22 +250,22 @@ bool CXpm::parser(const char *file) {
     return true;
 }
 
-int CXpm::width() {
+int CXpm::width() const {
     if(this->m_pixmap.empty()) {
         return 0;
     }
     return this->m_pixmap[0].size();
 }
 
-int CXpm::height() {
+int CXpm::height() const {
     return this->m_pixmap.size();
 }
 
-int CXpm::pix_bits() {
+int CXpm::pix_bits() const {
     return this->m_pix_bits;
 }
 
-void CXpm::show_info() {
+void CXpm::show_info() const {
     std::cout << "size: " << this->m_width << "x" << this->m_height << std::endl;
     std::cout << "pixel_format: " << "rgb" << this->m_pix_bits << std::endl;
 }
@@ -273,7 +273,7 @@ void CXpm::show_info() {
 // 保存后可以使用
 // 类似ffplay -f rawvideo -pixel_format rgb24 -video_size 16x16 xpm-save.rgb
 // 的命令来查看
-bool CXpm::save(const char *file) {
+bool CXpm::save(const char *file) const {
     std::ofstream outfile;
 	outfile.open(file, std::ios::out|std::ios::binary);
 	if (!outfile.is_open()) {
@@ -293,7 +293,7 @@ bool CXpm::save(const char *file) {
     return true;
 }
 
-void CXpm::to_bitmap(char *data) {
+void CXpm::to_bitmap(char *data) const {
     int start_index = 0;
     for(auto y = 0;y < this->height();y++) {
         for(auto x = 0;x < this->width();x++) {

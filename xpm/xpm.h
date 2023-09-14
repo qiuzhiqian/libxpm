@@ -26,11 +26,11 @@ class CXpm{
 
     public:
     bool parser(const char* file);
-    int width();
-    int height();
-    int pix_bits();
-    void show_info();
+    int width() const;
+    int height() const;
+    int pix_bits() const;
+    void show_info() const;
 
-    bool save(const char* file);
-    void to_bitmap(char* data);
+    bool save(const char* file) const;
+    void to_bitmap(char* data) const;
 };
