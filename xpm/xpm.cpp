@@ -190,7 +190,6 @@ bool CXpm::parser(const char *file) {
                                 rgb = get_color_by_name(symble);
                             }
                             catch (const std::out_of_range& oor) {
-                                infile.close();
                                 return false;
                             }
                             this->m_color_cache[key] = rgb;
@@ -199,7 +198,6 @@ bool CXpm::parser(const char *file) {
                         //std::cout << r << " " << g << " " << b << " " << std::endl;
                         
                     } else {
-                        infile.close();
                         return false;
                     }
 
@@ -231,7 +229,6 @@ bool CXpm::parser(const char *file) {
                 line_num++;
             } else {
                 // TODO 此处需要过滤注释行
-                //infile.close();
                 //return false;
             }
         }

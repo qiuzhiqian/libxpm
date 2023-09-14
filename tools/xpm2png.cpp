@@ -93,7 +93,7 @@ int main(int argc,char** argv) {
         return 0;
     }
 
-    CXpm *xpm = new CXpm();
+    auto xpm = std::unique_ptr<CXpm>(new CXpm());
     if(xpm->parser(argv[1])) {
         xpm->show_info();
         
