@@ -6,6 +6,8 @@
 #include <map>
 #include <algorithm>
 
+namespace xpm{
+
 const std::map<std::string, RGB> color_name_map= {
     {"aqua", {0x00,0xff,0xff}},
     {"black", {0x00,0x00,0x00}},
@@ -307,4 +309,6 @@ void CXpm::to_bitmap(char *data) const {
             start_index+=len;
         }
     }
+}
+
 }

@@ -5,6 +5,7 @@
 #include <string>
 #include <vector>
 
+namespace xpm {
 struct RGB{
     uint32_t r;
     uint32_t g;
@@ -34,3 +35,4 @@ class CXpm{
     bool save(const char* file) const;
     void to_bitmap(char* data) const;
 };
+}

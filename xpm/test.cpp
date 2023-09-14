@@ -22,7 +22,7 @@ int main(int argc,char** argv) {
 
     for(auto i:list) {
         std::cout << "parser: " << i<< std::endl;
-        CXpm xpm;
+        xpm::CXpm xpm;
         std::string path = std::string(argv[1]) + "/" + i;
         if(xpm.parser(path.c_str())) {
             xpm.show_info();
