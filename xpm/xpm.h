@@ -12,7 +12,7 @@ struct RGB{
     uint32_t b;
 };
 
-class CXpm{
+class Parser{
     private:
     int m_height=0;
     int m_width=0;
