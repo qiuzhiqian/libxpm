@@ -8,7 +8,7 @@ int main(int argc,char** argv) {
     }
 
     auto xpm = std::unique_ptr<xpm::Parser>(new xpm::Parser());
-    if(xpm->parser(argv[1])) {
+    if(xpm->parse(argv[1])) {
         xpm->show_info();
         xpm->save(argv[2]);
     } else {

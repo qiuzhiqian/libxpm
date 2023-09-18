@@ -26,7 +26,7 @@ class Parser{
     std::map<std::string,RGB> m_color_cache;
 
     public:
-    bool parser(const char* file);
+    bool parse(const char* file);
     int width() const;
     int height() const;
     int pix_bits() const;

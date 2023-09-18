@@ -94,7 +94,7 @@ int main(int argc,char** argv) {
     }
 
     auto xpm = std::unique_ptr<xpm::Parser>(new xpm::Parser());
-    if(xpm->parser(argv[1])) {
+    if(xpm->parse(argv[1])) {
         xpm->show_info();
         
         int bytes_cout = xpm->pix_bits()/8 * xpm->height() * xpm->width();

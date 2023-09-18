@@ -24,7 +24,7 @@ int main(int argc,char** argv) {
         std::cout << "parser: " << i<< std::endl;
         xpm::Parser xpm;
         std::string path = std::string(argv[1]) + "/" + i;
-        if(xpm.parser(path.c_str())) {
+        if(xpm.parse(path.c_str())) {
             xpm.show_info();
         } else {
             std::cerr << "xpm parser failed." << std::endl;

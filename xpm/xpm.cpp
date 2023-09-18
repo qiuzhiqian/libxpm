@@ -91,7 +91,12 @@ RGB get_color_by_name(const std::string color) {
     return rgb;
 }
 
-bool Parser::parser(const char *file) {
+bool Parser::parse(const char *file) {
+    if(this->m_height > 0 && this->m_width > 0) {
+        // has parse
+        return true;
+    }
+    
     std::ifstream infile;
 	infile.open(file, std::ios::in);
 	if (!infile.is_open()) {
